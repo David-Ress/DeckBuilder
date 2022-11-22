@@ -14,6 +14,7 @@ router.get('/search', searchController.searchPage);
 router.get('/search/element/:element', searchController.searchByElement);
 router.get('/search/level/:level', searchController.searchByLevel);
 router.get('/search/values/:value', searchController.searchByValue);
+router.get('/search/name/:name', searchController.searchByName);
 
 //page deck
 router.get('/deck', deckController.deckPage);

@@ -41,6 +41,17 @@ const searchController = {
     } catch (error){
       res.status(500).send('Oups, problème technique, repassez plus tard');
     }
+  },
+  searchByName: async(req,res) => {
+    try{
+      const searchedName = req.query.name
+      console.log(searchedName)
+      searchResult = await dataMapper.searchResultByName(searchedName)
+      res.render('./searchResults/searchResultName' , {cards : searchResult, searchedName })
+    } catch (error){
+      console.trace(error);
+      res.status(500).send('Oups, problème technique, repassez plus tard');
+    }
   }
 };
 
