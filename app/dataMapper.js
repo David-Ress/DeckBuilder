@@ -32,12 +32,12 @@ const dataMapper = {
     return results.rows
   } ,
 
-  async searchResultByLevel(level) {
+  searchResultByLevel: async (level) => {
     const searchResult = await client.query (`SELECT * FROM card WHERE "level" ='${level}'`)
     return searchResult.rows
   } ,
   
-  async searchResultByValue(direction ,value ) {
+  searchResultByValue: async (direction ,value ) => {
     const query = {
     text: `
     SELECT * FROM card WHERE
@@ -51,7 +51,7 @@ const dataMapper = {
     return searchResults.rows
   },
 
-  async searchResultByName(name){
+  searchResultByName: async(name) => {
     const query = {
       text:`SELECT * FROM card WHERE name ILIKE $1 `, values: [`%${name}%`]
     };

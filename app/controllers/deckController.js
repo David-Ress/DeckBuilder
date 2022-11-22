@@ -9,9 +9,9 @@ const deckController = {
   //Ajout au deck:
   addCardToDeck: async (req, res, next) => {
     const id = req.params.id;
-    const findCardInDeck = req.session.deck.find((deck) => deck.id === id);
+    const findCardInDeck = req.session.deck.find(card => card.id === Number(id));
     if (findCardInDeck){
-      res.redirect('/deck');
+      res.redirect('/');
     } else {
 
         if(req.session.deck.length <=5) {
@@ -37,6 +37,7 @@ const deckController = {
     }
   }
 },
+
 //Suppression du deck:
   removeCardFromDeck: async (req, res, next) => {
     const id = Number(req.params.id)
