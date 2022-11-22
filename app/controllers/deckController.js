@@ -2,9 +2,11 @@ const { request } = require('express');
 const dataMapper = require ('../dataMapper');
 
 const deckController = {
+  //Page de présentation du deck:
   deckPage: async (req, res, next) => {
     res.render('deckMain', {cards : req.session.deck})
   },
+  //Ajout au deck:
   addCardToDeck: async (req, res, next) => {
     try {
 
@@ -30,6 +32,14 @@ const deckController = {
       res.status(500).send('une erreur s\'est produite.');
     }
   },
+//Suppression du deck:
+  removeCardFromDeck: async (req, res, next) => {
+    const id = Number(req.params.id)
+    if (req.session.deck){
+      req.session.deck = req.session.deck.filter((deck) => deck.id !==id)
+    }
+    res.redirect('/deck');
+  }
 }
 
 module.exports = deckController;

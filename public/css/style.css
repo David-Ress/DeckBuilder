@@ -79,6 +79,17 @@
   text-decoration: none;
 }
 
+.card .link--removeCard {
+  position: absolute;
+  bottom: 6%;
+  right: 24%;
+  color: red;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+
+
 .card-details__addCard {
   color: red;
   font-weight: 900;
