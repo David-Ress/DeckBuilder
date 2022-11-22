@@ -1,0 +1,19 @@
+<%- include('header') %>
+<h2> Résultat de la recherche pour l'élément: <%= searchedElement%> </h2>
+
+
+<% for (card of cards) { %>
+
+  <div class="card">
+    <a href="/card/<%= card.id %>">
+      <img src="/visuals/<%= card.visual_name %>" alt="<%= card.name %> illustration">
+      <p class="cardName"><%= card.name %></p>
+    </a>
+    <a class="link--addCard" title="Ajouter au deck" href="#">[ + ]</a>
+  </div>
+
+<% } %>
+
+
+
+<%- include('footer') %>

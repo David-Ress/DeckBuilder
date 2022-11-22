@@ -27,7 +27,7 @@ const mainController = {
       console.trace(error);
       res.status(500).send('Oups, problème technique, repassez plus tard');
     }
-  }
+  },
 };
 
 module.exports = mainController;

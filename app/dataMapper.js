@@ -15,8 +15,12 @@ const dataMapper = {
     } else {
       return null;
     }
-    
-  }
+  },
+  async searchResultByElement(element) {
+    const searchResult = await client.query (`SELECT * FROM card WHERE "element" IS NOT NULL AND "element"='${element}'`)
+    'tonnerre'
+    return searchResult.rows
+  } 
 };
 
 
