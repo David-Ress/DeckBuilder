@@ -7,17 +7,34 @@ const searchController = {
 
   // la méthode pour chercher par élément
   searchByElement: async (req, res) => {
-    try {
-      const searchedElement = req.query.element
-      const searchResult = await dataMapper.searchResultByElement(searchedElement);
-      console.log(searchedElement)
-      res.render('./searchResults/searchResultElement' , {cards : searchResult, searchedElement })
-    } catch(error){
-      console.trace(error);
-      res.status(500).send('Oups, problème technique, repassez plus tard');
-    }
+    const element = req.query.element;
+    dataMapper.searchResultByElement(element, (error, cards) => {
+        if (error) {
+            res.status(500).send('error');
+        } else {
+            const title = 'Liste des cartes ' + (element === 'null' ? ' sans élément' : `d'élement ${element}`);
+            res.render('cardList', {
+                cards,
+                title
+            });
+        }
+    });
     
-  },
+    try {
+      const element = req.query.element;
+      const cards = await dataMapper.searchResultByElement(element);
+      const title = 'Résultat de la recherche par élément: ' + (element === 'null' ? ' sans élément' : `d'élement ${element}`);
+      res.render('cardList', {
+        cards,
+        title
+      });
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('error');
+    }
+},
+
   // La méthode pour chercher par niveau: petit hic, quand on appuie sur le bouton chercher dans le field "niveau", ça nous renvoie vers la view searchResultElement. 
   // Solution: j'ai rajouté un paramètre à la route: /search/level/:level
   searchByLevel: async (req, res) => {

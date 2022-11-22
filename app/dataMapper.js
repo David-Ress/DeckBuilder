@@ -7,18 +7,29 @@ const dataMapper = {
     const result = await database.query(query);
     return result.rows;
   },
-  async getCard(id) {
+  getCard: async (id, callback) => {
     const queryResult = await client.query( `SELECT * FROM card WHERE "id" = ${id}`,
     );
     if (queryResult.rowCount === 1){
-      return queryResult.rows[0]
+      return queryResult.rows[0];
     } else {
       return null;
     }
   },
-  async searchResultByElement(element) {
-    const searchResult = await client.query (`SELECT * FROM card WHERE "element" IS NOT NULL AND "element"='${element}'`)
-    return searchResult.rows
+  searchResultByElement: async (element, callback) => {
+    let query
+    if (element === 'null') {
+      query= {
+        text:`SELECT * FROM "card" WHERE "element" IS NULL`
+      };
+    } else {
+      query = {
+        text: `SELECT * FROM "card" WHERE "element" = $1`,
+        values:[element]
+      };
+    }
+    const results = await database.query(query);
+    return results.rows
   } ,
 
   async searchResultByLevel(level) {
