@@ -3,9 +3,7 @@ const dataMapper = require ('../dataMapper');
 
 const deckController = {
   deckPage: async (req, res, next) => {
-    console.log(req.session.deck)
-    console.log(req.session.deck.length)
-    res.redirect('/')
+    res.render('deckMain', {cards : req.session.deck})
   },
   addCardToDeck: async (req, res, next) => {
     try {
