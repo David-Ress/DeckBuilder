@@ -53,11 +53,11 @@ const searchController = {
     try{
       const searchedDirection = req.query.direction
       const searchedValue = Number(req.query.value)
-      console.log(searchedValue)
-      searchResult = await dataMapper.searchResultByValue(searchedDirection, searchedValue)
+      const searchResult = await dataMapper.searchResultByValue(searchedDirection, searchedValue)
       const title = `Résultat de la recherche pour la valeur ${searchedDirection} à au moins ${searchedValue}`;
       res.render('cardList' , {cards : searchResult, searchedValue, searchedDirection, title })
     } catch (error){
+      console.trace(error);
       res.status(500).send('Oups, problème technique, repassez plus tard');
     }
   },

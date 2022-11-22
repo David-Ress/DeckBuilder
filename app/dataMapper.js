@@ -37,9 +37,18 @@ const dataMapper = {
     return searchResult.rows
   } ,
   
-  async searchResultByValue(direction, value) {
-    const searchResult = await client.query (`SELECT * FROM card WHERE value_${direction} >= ${value}  `)
-    return searchResult.rows
+  async searchResultByValue(direction ,value ) {
+    const query = {
+    text: `
+    SELECT * FROM card WHERE
+    $1 = 'north' AND value_north >= $2  
+    OR	$1 = 'south' AND value_south >= $2
+    OR	$1 = 'east' AND value_east >= $2
+    OR	$1 = 'west' AND value_west >= $2;
+    `,
+    values : [direction, value]}
+    const searchResults = await database.query(query)
+    return searchResults.rows
   },
 
   async searchResultByName(name){
