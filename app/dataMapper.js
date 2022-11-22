@@ -18,9 +18,18 @@ const dataMapper = {
   },
   async searchResultByElement(element) {
     const searchResult = await client.query (`SELECT * FROM card WHERE "element" IS NOT NULL AND "element"='${element}'`)
-    'tonnerre'
     return searchResult.rows
-  } 
+  } ,
+
+  async searchResultByLevel(level) {
+    const searchResult = await client.query (`SELECT * FROM card WHERE "level" ='${level}'`)
+    return searchResult.rows
+  } ,
+  
+  async searchResultByValue(direction, value) {
+    const searchResult = await client.query (`SELECT * FROM card WHERE value_${direction} >= ${value}  `)
+    return searchResult.rows
+  }
 };
 
 
