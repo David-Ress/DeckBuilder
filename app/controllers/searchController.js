@@ -42,6 +42,7 @@ const searchController = {
       res.status(500).send('Oups, problème technique, repassez plus tard');
     }
   },
+  //TODO : RECHERCHE PAR NOM
   searchByName: async(req,res) => {
     try{
       const searchedName = req.query.name
