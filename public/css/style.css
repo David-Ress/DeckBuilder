@@ -65,10 +65,21 @@
   color: #eee;
 }
 
+.card-details__container {
+  display: flex;
+  justify-content:center;
+}
+
 .card .link--addCard {
   position: absolute;
   top: 6%;
   right: 24%;
+  color: red;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.card-details__addCard {
   color: red;
   font-weight: 900;
   text-decoration: none;

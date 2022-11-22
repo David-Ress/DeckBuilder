@@ -1,0 +1,20 @@
+<%- include('header') %>
+
+<div class="card-details__container">
+
+
+<div class="card">
+  <p> Name: <%= card.name %></p>
+  <p> Level: <%= card.level%> </p>
+  <p> North Value: <%= card.value_north %></p>
+  <p> East Value: <%= card.value_east %></p>
+  <p> West Value: <%= card.value_west%></p>
+  <p> South Value: <%= card.value_south %></p>
+  <img src="/visuals/<%= card.visual_name %>" alt="<%= card.name %> illustration">
+  <a class="card-details__addCard" title="Ajouter au deck" href="#">[ + ]</a>
+
+</div>
+
+</div>
+
+<%- include('footer') %>
