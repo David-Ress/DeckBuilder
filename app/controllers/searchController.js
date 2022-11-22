@@ -42,7 +42,8 @@ const searchController = {
       const searchedLevel = Number(req.query.level)
       console.log(searchedLevel)
       const searchResult = await dataMapper.searchResultByLevel(searchedLevel);
-      res.render('./searchResults/searchResultLevel' , {cards : searchResult, searchedLevel })
+      const title = 'Résultat de la recherche pour le niveau: ' + (`${searchedLevel}`);
+      res.render('cardList' , {cards : searchResult, title  })
     } catch(error){
       console.trace(error);
       res.status(500).send('Oups, problème technique, repassez plus tard');
@@ -54,7 +55,8 @@ const searchController = {
       const searchedValue = Number(req.query.value)
       console.log(searchedValue)
       searchResult = await dataMapper.searchResultByValue(searchedDirection, searchedValue)
-      res.render('./searchResults/searchResultValue' , {cards : searchResult, searchedValue, searchedDirection })
+      const title = `Résultat de la recherche pour la valeur ${searchedDirection} à au moins ${searchedValue}`;
+      res.render('cardList' , {cards : searchResult, searchedValue, searchedDirection, title })
     } catch (error){
       res.status(500).send('Oups, problème technique, repassez plus tard');
     }
@@ -63,7 +65,8 @@ const searchController = {
     const searchedName = req.query.name;
     try{
       const searchResult = await dataMapper.searchResultByName(searchedName);
-      res.render('./searchResults/searchResultName' , {cards : searchResult, searchedName });
+      const title = `Résultat de la recherches pour les cartes qui contiennent ${searchedName}`
+      res.render('cardList' , {cards : searchResult, searchedName, title });
     } catch (error){
       console.trace(error);
       res.status(500).send('Oups, problème technique, repassez plus tard');

@@ -11,7 +11,7 @@
   <p> West Value: <%= card.value_west%></p>
   <p> South Value: <%= card.value_south %></p>
   <img src="/visuals/<%= card.visual_name %>" alt="<%= card.name %> illustration">
-  <a class="card-details__addCard" title="Ajouter au deck" href="#">[ + ]</a>
+  <a class="card-details__addCard" title="Ajouter au deck" href="/deck/add/<%=card.id%>">[ + ]</a>
 
 </div>
 
