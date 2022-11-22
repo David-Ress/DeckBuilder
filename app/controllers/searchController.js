@@ -8,8 +8,8 @@ const searchController = {
   // la méthode pour chercher par élément
   searchByElement: async (req, res) => {
     try {
-      searchedElement = req.query.element
-      searchResult = await dataMapper.searchResultByElement(searchedElement);
+      const searchedElement = req.query.element
+      const searchResult = await dataMapper.searchResultByElement(searchedElement);
       console.log(searchedElement)
       res.render('./searchResults/searchResultElement' , {cards : searchResult, searchedElement })
     } catch(error){
@@ -22,9 +22,9 @@ const searchController = {
   // Solution: j'ai rajouté un paramètre à la route: /search/level/:level
   searchByLevel: async (req, res) => {
     try {
-      searchedLevel = Number(req.query.level)
+      const searchedLevel = Number(req.query.level)
       console.log(searchedLevel)
-      searchResult = await dataMapper.searchResultByLevel(searchedLevel);
+      const searchResult = await dataMapper.searchResultByLevel(searchedLevel);
       res.render('./searchResults/searchResultLevel' , {cards : searchResult, searchedLevel })
     } catch(error){
       console.trace(error);
@@ -42,13 +42,11 @@ const searchController = {
       res.status(500).send('Oups, problème technique, repassez plus tard');
     }
   },
-  //TODO : RECHERCHE PAR NOM
   searchByName: async(req,res) => {
+    const searchedName = req.query.name;
     try{
-      const searchedName = req.query.name
-      console.log(searchedName)
-      searchResult = await dataMapper.searchResultByName(searchedName)
-      res.render('./searchResults/searchResultName' , {cards : searchResult, searchedName })
+      const searchResult = await dataMapper.searchResultByName(searchedName);
+      res.render('./searchResults/searchResultName' , {cards : searchResult, searchedName });
     } catch (error){
       console.trace(error);
       res.status(500).send('Oups, problème technique, repassez plus tard');

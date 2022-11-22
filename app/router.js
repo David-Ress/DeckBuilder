@@ -11,15 +11,15 @@ router.get ('/card/:id', mainController.articlePage);
 
 //page recherche
 router.get('/search', searchController.searchPage);
-router.get('/search/element/:element', searchController.searchByElement);
-router.get('/search/level/:level', searchController.searchByLevel);
-router.get('/search/values/:value', searchController.searchByValue);
-router.get('/search/name/:name', searchController.searchByName);
+router.get('/search/element', searchController.searchByElement);
+router.get('/search/level', searchController.searchByLevel);
+router.get('/search/values', searchController.searchByValue);
+router.get('/search/name', searchController.searchByName);
 
 //page deck
 router.get('/deck', deckController.deckPage);
-router.post('/deck/add/:id', deckController.addCardToDeck);
-router.post ('/deck/remove/:id', deckController.removeCardFromDeck);
+router.get('/deck/add/:id', deckController.addCardToDeck);
+router.get ('/deck/remove/:id', deckController.removeCardFromDeck);
 
 
 module.exports = router;

@@ -32,8 +32,10 @@ const dataMapper = {
   },
 
   async searchResultByName(name){
-    //TODO : RECHERCHE PAR NOM
-    const searchResult = await client.query (`SELECT * FROM card WHERE name LIKE '${name.toLowerCase()}' `)
+    const query = {
+      text:`SELECT * FROM card WHERE name ILIKE $1 `, values: [`%${name}%`]
+    };
+    const searchResult =  await database.query(query)
     return searchResult.rows
   }
 };

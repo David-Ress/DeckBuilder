@@ -8,30 +8,35 @@ const deckController = {
   },
   //Ajout au deck:
   addCardToDeck: async (req, res, next) => {
-    try {
-
-      if(req.session.deck.length <=5) {
-
-      
-        const id = Number(req.params.id);
-        const card = await dataMapper.getCard(id);
-        if (card){
-          const findCardInDeck = req.session.deck.find((deck) => deck.id === id);
-            if(!findCardInDeck){
-              req.session.deck.push(card);
-            }
-            res.redirect('/')
-        } else {
-          next()
-        }
+    const id = req.params.id;
+    const findCardInDeck = req.session.deck.find((deck) => deck.id === id);
+    if (findCardInDeck){
+      res.redirect('/deck');
     } else {
-      res.redirect('/')
-    }
 
-    } catch(error){
-      res.status(500).send('une erreur s\'est produite.');
+        if(req.session.deck.length <=5) {
+        try {
+
+        
+        const card = await dataMapper.getCard(id);
+
+          if (card){
+
+              if(!findCardInDeck){
+                req.session.deck.push(card);
+                res.redirect('/');
+              }
+          } else {
+            res.status(404).send(`Card with id ${id} not found`);
+          }
+      } catch (error){
+        console.error(error);
+        
+      res.status(500).send('Oups, problème technique, repassez plus tard');
+      }
     }
-  },
+  }
+},
 //Suppression du deck:
   removeCardFromDeck: async (req, res, next) => {
     const id = Number(req.params.id)
